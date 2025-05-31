@@ -1,3 +1,5 @@
+pub use std::io::{Error, ErrorKind};
+
 pub const META_SECTOR: u8 = 0xFF;
 pub const END: u8 = 0xF5;
 pub const SEPARATOR: u8 = 0xC0;

@@ -1,14 +1,14 @@
 use rand::Rng;
 use crate::commons;
 
-pub fn encrypt_string(s: &Vec<u8>) -> Vec<u8> {
+pub fn encode_bytes(s: &Vec<u8>) -> Vec<u8> {
     let mut result: Vec<u8> = Vec::new();
     for i in s.len()..0 {
         let b = s[i];
         result.push(b);
     }
     let mut rng = rand::thread_rng();
-    let mut i: u64 = 1;
+    let mut i: u64 = 0;
     loop {
         let mut fillup = false;
         let mut diff: usize = 0;
@@ -26,6 +26,9 @@ pub fn encrypt_string(s: &Vec<u8>) -> Vec<u8> {
             break;
         } else {
             i += 10;
+        }
+        for b in 0..meta_bytes.len() {
+            result.insert((i + 5 + b) as usize, meta_bytes[b]);
         }
     }
     let result_old = result.clone();
