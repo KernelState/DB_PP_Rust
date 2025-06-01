@@ -2,12 +2,12 @@
   This library should not be used for production and I give permission for anyone to edit it and add it to their project
 
 # Usage
-  `SBE::encrypt::encrypt<'a>(s: String) -> &'a [u8]`:
+  `SBE::encrypt::encrypt_bytes(s: &Vec<u8>) -> Vec<u8>`:
     First, understanding the process:
       `SBE` takes every 5 bytes and flips them, then it adds after them another 5 bytes, those bytes are responsible for determining the randomly chosen and replaced byte which is called the `replace_char` which gets put at the end and if the byte array didn't end in perfect fives it fills the rest of `meta_bytes` with `1`
     Second, what is the output:
       the output is a `refrence` which means that you need to `.clone()` it to ensure that `ownership` is under control
-  `SBE::decrypt::decrypt(b: &[u8]) -> String`:
+  `SBE::decrypt::decrypt_bytes(b: &Vec<u8>) -> Vec<u8>`:
   First, understanding the process: 
     this reverses the function above by first reading the 5 `meta_bytes` before reading the 5 `bytes` themselves and puts the `replace_char` in it's original place then re-flips them to get to the original state and clears the `meta_bytes`
   Second, usage:
